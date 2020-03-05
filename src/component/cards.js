@@ -1,6 +1,7 @@
 import React from "react";
-
+import Sidebar from "./sidebar";
 import Card from "./card";
+import Header from "./header";
 
 var data = [
   {
@@ -50,7 +51,7 @@ class Cards extends React.Component {
   }
   updatePopular = id => {
     console.log("inside update");
-    var updatedState = this.state.data.map(v => {
+    let updatedState = this.state.data.map(v => {
       if (v.id === id) {
         v.popular += 1;
       }
@@ -58,10 +59,14 @@ class Cards extends React.Component {
     });
     this.setState({ data: updatedState });
   };
+
+  addlist = obj => {
+    this.setState({ data: this.state.data.push(obj) });
+  };
+
   render() {
     return (
       <div className="list_big_container">
-        {console.log("hello")}
         <div className="today_heading">
           <h3 className="today">Today</h3>
           <span className="popular_new">POPULAR NEWEST</span>
