@@ -1,6 +1,5 @@
 import React from "react";
 
-import "./style.css";
 var Header = () => {
   return (
     <div className="main_container">

@@ -1,7 +1,5 @@
 import React from "react";
 
-import "./style.css";
-
 const Card = props => {
   return (
     <div>
@@ -21,8 +19,10 @@ const Card = props => {
           </div>
         </div>
         <div className="popular_container">
-          <div> &#9660;</div>
-          <div>{props.popular}</div>
+          <button onClick={() => props.updatePopular(props.id)}>
+            <div> &#9650;</div>
+            <div>{props.popular}</div>
+          </button>
         </div>
       </div>
     </div>
