@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "../component/style.css";
-
+var obj = {};
 let data = [
   {
     img:
@@ -140,11 +140,10 @@ const Sidebar = props => {
           <h3 className="today">Create a new item</h3>
         </div>
         <div className="form_container">
-          {/* { var obj = {}} */}
           <form>
             <label for="name"> Name</label>
             <input
-              onChange={e => console.log(e.target.value)}
+              onChange={e => (obj.name = e.target.value)}
               type="text"
               id="name"
               className="search_bar subscribe_email"
@@ -152,6 +151,7 @@ const Sidebar = props => {
             ></input>
             <label for="description"> Description</label>
             <input
+              onChange={e => (obj.description = e.target.value)}
               type="text"
               id="description"
               className="search_bar subscribe_email"
@@ -159,6 +159,7 @@ const Sidebar = props => {
             ></input>
             <label for="tags"> Tags</label>
             <input
+              onChange={e => (obj.tag = ["bim", 240])}
               type="text"
               id="tags"
               className="search_bar subscribe_email"
@@ -166,6 +167,7 @@ const Sidebar = props => {
             ></input>
             <label for="image"> Image Url</label>
             <input
+              onChange={e => (obj.img = e.target.value)}
               type="text"
               id="image"
               className="search_bar subscribe_email"
@@ -173,6 +175,7 @@ const Sidebar = props => {
             ></input>
             <label for="popular"> Popular</label>
             <input
+              onChange={e => (obj.popular = e.target.value)}
               type="text"
               id="popular"
               className="search_bar subscribe_email"
@@ -180,7 +183,12 @@ const Sidebar = props => {
             ></input>
           </form>
           <div>
-            <button className="btn Signup subscribe">Create</button>
+            <button
+              onClick={e => props.addList(obj)}
+              className="btn Signup subscribe"
+            >
+              Create
+            </button>
           </div>
         </div>
       </div>
