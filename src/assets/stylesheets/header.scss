@@ -3,8 +3,10 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  background-color: #e8eff5;
   // border: 1px solid black;
   height: 100vh;
+  transition: all 400ms;
 }
 .header_subcontainer {
   display: flex;
@@ -16,12 +18,12 @@
   height: 85%;
   align-items: center;
   border-radius: 10px;
-  border: 1px solid green;
-  box-shadow: 7px 7px 15px #bbcfda, -4px -4px 13px #fff,
-    inset 4px 4px 8px rgba(209, 217, 230, 0.2),
-    inset -8px -8px 8px rgba(255, 255, 255, 0.2);
+  // border: 1px solid green;
+  box-shadow: 7px 7px 15px #bbcfda, -7px -7px 15px #fff;
+  // inset 4px 4px 8px rgba(209, 217, 230, 0.2),
+  // inset -8px -8px 8px rgba(255, 255, 255, 0.2);
 
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  // border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .colorful_circle1 {
@@ -35,8 +37,8 @@
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.3);
   background: linear-gradient(145deg, #d1d7dd, #f8ffff);
-  // box-shadow: 5px 5px 10px #909498, -5px -5px 10px #ffffff;
   box-shadow: 5px 5px 10px #909498, -5px -5px 10px #ffffff;
+  transition: all 400ms;
 }
 .colorful_circle2 {
   align-self: center;
@@ -78,4 +80,10 @@
   color: #f12711; /* fallback for old browsers */
   filter: drop-shadow(3px 3px 2px #909498);
   text-shadow: 5px 5px 3px #000000;
+}
+.active_icon {
+  background-color: #e8eff5;
+  box-shadow: 0 0 5px #909498;
+  // border: 0.5px solid #f12711;
+  // border: 3px solid black;
 }

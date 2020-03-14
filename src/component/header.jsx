@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import { IoMdLogIn, IoMdLogOut } from "react-icons/io";
@@ -8,8 +9,12 @@ const Header = () => {
     <div className="header">
       {/* <h1>header section</h1> */}
       <div className="header_subcontainer">
-        {/* first icon */}
-        <div className="colorful_circle1">
+        {/* home icon */}
+        <NavLink
+          activeClassName="active_icon"
+          to="/"
+          className="colorful_circle1"
+        >
           <div className="colorful_circle2">
             <div className="icon">
               <IconContext.Provider value={{ className: "icon_shadow" }}>
@@ -19,9 +24,13 @@ const Header = () => {
               </IconContext.Provider>
             </div>
           </div>
-        </div>
+        </NavLink>
         {/* login btn */}
-        <div className="colorful_circle1">
+        <NavLink
+          activeClassName="active_icon"
+          to="/login"
+          className="colorful_circle1"
+        >
           <div className="colorful_circle2">
             <div className="icon">
               <IconContext.Provider value={{ className: "icon_shadow" }}>
@@ -31,9 +40,13 @@ const Header = () => {
               </IconContext.Provider>
             </div>
           </div>
-        </div>
+        </NavLink>
         {/* sign up ben*/}
-        <div className="colorful_circle1">
+        <NavLink
+          activeClassName="active_icon"
+          to="/signup"
+          className="colorful_circle1"
+        >
           <div className="colorful_circle2">
             <div className="icon">
               <IconContext.Provider value={{ className: "icon_shadow" }}>
@@ -43,7 +56,7 @@ const Header = () => {
               </IconContext.Provider>
             </div>
           </div>
-        </div>
+        </NavLink>
       </div>
     </div>
   );

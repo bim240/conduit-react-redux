@@ -1,3 +1,12 @@
-.article {
-  // border: 1px solid wheat;
+.article_main_conatiner {
+  height: 95vh;
+  margin: auto 30px;
+  border-radius: 20px;
+  box-shadow: 7px 7px 15px #bbcfda, -7px -7px 15px #fff;
+  transition: all 400ms;
+  background-color: #e8eff5;
+  // inset 4px 4px 8px rgba(209, 217, 230, 0.2),
+  // inset -8px -8px 8px rgba(255, 255, 255, 0.2);
+
+  // border: 1px solid rgba(255, 255, 255, 0.3);
 }
