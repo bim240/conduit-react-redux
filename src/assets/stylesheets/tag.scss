@@ -1,5 +1,5 @@
 .tag_main_container {
-  height: 95vh;
+  // height: 95vh;
   margin: auto 0;
   margin-right: 25px;
   border-radius: 20px;
@@ -13,6 +13,7 @@
   // border: 1px solid rgba(255, 255, 255, 0.3);
 }
 .tag_heading {
+  width: 100%;
   font-family: "Roboto", sans-serif;
   display: block;
   text-shadow: 3px 3px 2px #bbcfda, -3px -3px 2px #fff;
@@ -32,9 +33,11 @@
   box-shadow: 5px 5px 10px #bbcfda, -4px -4px 8px #fff;
 }
 .single_tags {
-  margin: 3px;
+  margin: 4px;
   padding: 4px 8px;
   border-radius: 4px;
   background: linear-gradient(145deg, #d1d7dd, #f8ffff);
   box-shadow: 3px 3px 7px #909498, -3px -3px 7px #ffffff;
+  color: #525252;
+  font-weight: 700;
 }

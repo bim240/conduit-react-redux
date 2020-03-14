@@ -14,11 +14,6 @@ class Tag extends React.Component {
     console.log(this.state.tags);
   }
   render() {
-    this.state.tags &&
-      this.state.tags.tags.forEach(element => {
-        console.log(element);
-      });
-    console.log(this.state.tags);
     return (
       <div className="tag_main_container">
         <div className="tag_heading">Tags</div>
