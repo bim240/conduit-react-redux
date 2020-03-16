@@ -9,6 +9,9 @@ body {
 * {
   box-sizing: border-box;
 }
+body::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
 /* ====================================
       home page devision
 ==================================== */
@@ -18,3 +21,5 @@ body {
 @import "./tag.scss";
 @import "./login.scss";
 @import "./signup.scss";
+@import "./create_article.scss";
+@import "./setting.scss";

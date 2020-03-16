@@ -1,8 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { FaHome } from "react-icons/fa";
+import { FaHome, FaEdit } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import { IoMdLogIn, IoMdLogOut } from "react-icons/io";
+import { MdSettings } from "react-icons/md";
 
 const Header = () => {
   return (
@@ -41,7 +42,7 @@ const Header = () => {
             </div>
           </div>
         </NavLink>
-        {/* sign up ben*/}
+        {/* sign up btn*/}
         <NavLink
           activeClassName="active_icon"
           to="/signup"
@@ -52,6 +53,38 @@ const Header = () => {
               <IconContext.Provider value={{ className: "icon_shadow" }}>
                 <div>
                   <IoMdLogOut />
+                </div>
+              </IconContext.Provider>
+            </div>
+          </div>
+        </NavLink>
+        {/* add article */}
+        <NavLink
+          activeClassName="active_icon"
+          to="/editor"
+          className="colorful_circle1"
+        >
+          <div className="colorful_circle2">
+            <div className="icon">
+              <IconContext.Provider value={{ className: "icon_shadow" }}>
+                <div>
+                  <FaEdit />
+                </div>
+              </IconContext.Provider>
+            </div>
+          </div>
+        </NavLink>
+        {/* setting */}
+        <NavLink
+          activeClassName="active_icon"
+          to="/setting"
+          className="colorful_circle1"
+        >
+          <div className="colorful_circle2">
+            <div className="icon">
+              <IconContext.Provider value={{ className: "icon_shadow" }}>
+                <div>
+                  <MdSettings />
                 </div>
               </IconContext.Provider>
             </div>

@@ -1,0 +1,162 @@
+.create_article_main_container {
+  grid-column-start: 2;
+  grid-column-end: column3-end;
+  background: #e8eff5;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  // flex-direction: column;
+  height: 90vh;
+  width: 90%;
+  margin: auto;
+  border-radius: 25px;
+  font-family: "Roboto", sans-serif;
+  // border: 1px solid green;
+  // box-shadow: 7px 7px 15px #bbcfda, -7px -7px 15px #fff;
+  /* cursor: cell; */
+}
+.section_name {
+  font-size: 3rem;
+  font-weight: 900;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 10%;
+  // border: 1px solid green;
+  background-color: #e8eff5;
+  // border: 1px solid rgba(255, 255, 255, 0.3);
+  text-shadow: 3px 3px 2px #bbcfda, -3px -3px 2px #fff;
+  transition: all 400ms;
+  color: #f12711;
+}
+// .single_letter {
+//   margin-top: 5px;
+// }
+.create_article_sub_container {
+  height: 95%;
+  width: 80%;
+  margin-right: 1rem;
+  border-radius: 25px;
+  font-family: "Roboto", sans-serif;
+  // border: 1px solid green;
+  box-shadow: 4px 4px 10px #bbcfda, -4px -4px 10px #fff;
+}
+.create_article_form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 92%;
+  // border: 1px solid green;
+  margin: 15px auto;
+}
+.new_article_title {
+  width: 90%;
+  height: 3rem;
+  margin-top: 20px;
+  padding: 2px 2px 2px 1rem;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 7px 7px 15px #bbcfda, -4px -4px 13px #fff;
+  // inset 4px 4px 8px rgba(209, 217, 230, 0.2),
+  // inset -8px -8px 8px rgba(255, 255, 255, 0.2);
+  background-color: #e8eff5;
+  transition: all 400ms;
+  font-size: 1.4rem;
+  font-weight: 900;
+  // text-shadow: 3px 3px 2px #bbcfda, -3px -3px 2px #fff;
+  color: #525252;
+}
+.new_article_subtitle,
+.new_article_tag {
+  width: 90%;
+  height: 3rem;
+  margin-top: 20px;
+  padding: 2px 2px 2px 1rem;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 7px 7px 15px #bbcfda, -4px -4px 13px #fff;
+  // inset 4px 4px 8px rgba(209, 217, 230, 0.2),
+  // inset -8px -8px 8px rgba(255, 255, 255, 0.2);
+  background-color: #e8eff5;
+  transition: all 400ms;
+  font-size: 1rem;
+  font-weight: 900;
+  // text-shadow: 3px 3px 2px #bbcfda, -3px -3px 2px #fff;
+  color: #525252;
+  transition: all 400ms;
+}
+
+.new_article_content {
+  width: 90%;
+  height: 13rem;
+  margin-top: 20px;
+  padding: 8px 8px 8px 1rem;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 7px 7px 15px #bbcfda, -4px -4px 13px #fff;
+  // inset 4px 4px 8px rgba(209, 217, 230, 0.2),
+  // inset -8px -8px 8px rgba(255, 255, 255, 0.2);
+  background-color: #e8eff5;
+  transition: all 400ms;
+  font-size: 0.9rem;
+  font-weight: 900;
+  // text-shadow: 3px 3px 2px #bbcfda, -3px -3px 2px #fff;
+  color: #525252;
+}
+
+.new_article_submit_btn {
+  // display: block;
+
+  align-self: flex-end;
+  margin-top: 20px;
+  color: #525252;
+  font-size: 1rem;
+  font-weight: 900;
+  height: 2.5rem;
+  // width: 5rem;
+  /* padding-left: 2rem; */
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  box-shadow: 7px 7px 15px #bbcfda, -4px -4px 13px #fff,
+    inset 4px 4px 8px rgba(209, 217, 230, 0.2),
+    inset -8px -8px 8px rgba(255, 255, 255, 0.2);
+  background-color: #e8eff5;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  // text-shadow: 3px 3px 2px #bbcfda, -3px -3px 2px #fff;
+  transition: all 400ms;
+}
+.new_article_subtitle:focus,
+.new_article_tag:focus,
+.new_article_title:focus {
+  height: 3.5rem;
+  box-shadow: inset 5px 5px 10px #bbcfda, inset -4px -4px 13px #fff,
+    4px 4px 8px rgba(209, 217, 230, 0.2), 6px 6px 8px rgba(255, 255, 255, 0.2);
+  background-color: #e8eff5;
+  // transition: all 400ms;
+}
+.new_article_content:focus {
+  height: 13.5rem;
+  box-shadow: inset 5px 5px 10px #bbcfda, inset -4px -4px 13px #fff,
+    4px 4px 8px rgba(209, 217, 230, 0.2), 6px 6px 8px rgba(255, 255, 255, 0.2);
+  background-color: #e8eff5;
+}
+
+.new_article_submit_btn:hover {
+  transform: scale(0.96);
+}
+
+.new_article_submit_btn:hover {
+  box-shadow: 4px 2px 18px #bbcfda, -4px -4px 13px #fff,
+    inset 6px 6px 16px rgba(209, 217, 230, 0.8),
+    inset -8px -8px 8px rgba(255, 255, 255, 0.2);
+
+  transform: translateY(2px);
+  color: #f12711;
+  border: 0.5px solid #f12711;
+}
