@@ -1,17 +1,19 @@
 import React from "react";
+import { withRouter, NavLink } from "react-router-dom";
 
 class Tag extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tags: null
+      url:
+        "https://conduit.productionready.io/api/articles?limit=10&offset=0&tag="
     };
   }
   componentDidMount() {
     fetch("https://conduit.productionready.io/api/tags")
       .then(res => res.json())
       .then(res => this.setState({ tags: res }));
-    console.log(this.state.tags);
+    // console.log(this.state.tags);
   }
   render() {
     return (
@@ -20,12 +22,27 @@ class Tag extends React.Component {
         <div className="all_tag_container">
           {this.state.tags &&
             this.state.tags.tags.map(tag => {
-              return <div className="single_tags">{tag} </div>;
+              return (
+                <NavLink
+                  activeClassName="active_tag"
+                  to={`/tags/${tag}`}
+                  onClick={event =>
+                    this.props.updateArticle(
+                      this.state.url + this.props.match.params.tags,
+                      "notAll"
+                    )
+                  }
+                  className="single_tags"
+                >
+                  {tag}{" "}
+                </NavLink>
+              );
             })}
+          {/* <div className="clear_filter"> Clear All</div> */}
         </div>
       </div>
     );
   }
 }
 
-export default Tag;
+export default withRouter(Tag);

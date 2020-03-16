@@ -40,4 +40,25 @@
   box-shadow: 3px 3px 7px #909498, -3px -3px 7px #ffffff;
   color: #525252;
   font-weight: 700;
+  text-decoration: none;
+  transition: all 400ms;
+}
+.active_tag {
+  transform: scale(0.98);
+  box-shadow: none;
+  background-color: none;
+  // border: 0.5px solid #525252;
+}
+
+.clear_filter {
+  display: block;
+  margin: 4px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: linear-gradient(145deg, #d1d7dd, #f8ffff);
+  box-shadow: 3px 3px 7px #909498, -3px -3px 7px #ffffff;
+  color: #525252;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 400ms;
 }
