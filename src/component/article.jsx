@@ -1,15 +1,17 @@
 import React from "react";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter, Link, NavLink } from "react-router-dom";
 
 import { IconContext } from "react-icons";
 import { IoMdHeart } from "react-icons/io";
 import { GiSelfLove } from "react-icons/gi";
+import Loader from "./loader";
 
 class Article extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      articles: this.props.articles
+      articles: this.props.articles,
+      activeMenu: "global"
     };
   }
 
@@ -22,13 +24,44 @@ class Article extends React.Component {
     //   this.state.articles.articles.forEach(article => {
     //     console.log(article);
     //   });
-    return (
+    return this.props.articles ? (
       <div className="article_main_conatiner">
         <div className="article_sub_container">
-          <Link to="/" className="article_heading">
-            {" "}
-            Global
-          </Link>
+          <div className="feed_type">
+            <Link
+              onclick={() => this.setState({ activeMenu: "global" })}
+              to="/"
+              className={`article_heading ${
+                this.state.activeMenu === "global"
+                  ? "article_heading_active"
+                  : ""
+              }`}
+            >
+              {" "}
+              Global
+            </Link>
+            <Link
+              onclick={() => this.setState({ activeMenu: "feed" })}
+              to="/"
+              className={`article_heading ${
+                this.state.activeMenu === "feed" ? "article_heading_active" : ""
+              }`}
+            >
+              {" "}
+              Feed
+            </Link>
+            <Link
+              onclick={() => this.setState({ activeMenu: "tag" })}
+              to="/"
+              className={`article_heading ${
+                this.state.activeMenu === "tag" ? "article_heading_active" : ""
+              }`}
+            >
+              {" "}
+              Tag
+            </Link>
+          </div>
+
           <div className="all_article_container">
             {this.props.articles &&
               this.props.articles.articles.map(article => {
@@ -47,7 +80,12 @@ class Article extends React.Component {
                       </div>
                     </div>
                     <div className="article_content">
-                      <div className="article_title">{article.title}</div>
+                      <Link
+                        to={`/article/${article.slug}`}
+                        className="article_title"
+                      >
+                        {article.title}
+                      </Link>
                       <div className="article_body">{article.body}</div>
                     </div>
                     <div className="article_more_info">
@@ -77,6 +115,8 @@ class Article extends React.Component {
           </div>
         </div>
       </div>
+    ) : (
+      <Loader />
     );
   }
 }

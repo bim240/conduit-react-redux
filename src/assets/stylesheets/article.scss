@@ -16,12 +16,18 @@
   font-family: "Roboto", sans-serif;
   display: block;
   text-shadow: 3px 3px 2px #bbcfda, -3px -3px 2px #fff;
-  margin: 20px auto;
+  margin: 20px;
   font-size: 1.5rem;
   text-align: center;
   font-weight: 900;
   color: #f12711;
   text-decoration: none;
+}
+.article_heading_active {
+  border-bottom: 2px solid #f12711;
+}
+.feed_type {
+  display: flex;
 }
 .all_article_container {
   display: flex;
@@ -82,6 +88,8 @@ img {
   font-size: 1.3rem;
   font-weight: 900;
   text-transform: capitalize;
+  text-decoration: none;
+  color: #525252;
   // text-shadow: 3px 3px 2px #bbcfda, -3px -3px 2px #fff;
 }
 .article_body {

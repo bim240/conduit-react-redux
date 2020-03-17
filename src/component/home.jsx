@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 
 import Article from "./article";
 import Tag from "./tags";
+import { fetchData } from "../utils";
 
 class Home extends React.Component {
   constructor(props) {
@@ -13,21 +14,19 @@ class Home extends React.Component {
     };
   }
   componentDidMount() {
-    fetch("https://conduit.productionready.io/api/articles?limit=10&offset=0")
-      .then(res => res.json())
-      .then(res => this.setState({ articles: res }));
+    fetchData(
+      "https://conduit.productionready.io/api/articles?limit=10&offset=0"
+    ).then(res => this.setState({ articles: res }));
     // console.log(this.articles);
     // .then(res => console.log("hello"));
   }
   updateArticle = (url, tagName) => {
     if (tagName === "all") {
-      fetch("https://conduit.productionready.io/api/articles?limit=10&offset=0")
-        .then(res => res.json())
-        .then(res => this.setState({ articles: res }));
+      fetchData(
+        "https://conduit.productionready.io/api/articles?limit=10&offset=0"
+      ).then(res => this.setState({ articles: res }));
     } else {
-      fetch(url)
-        .then(res => res.json())
-        .then(res => this.setState({ articles: res }));
+      fetchData(url).then(res => this.setState({ articles: res }));
       // .then(res => console.log(url));
     }
   };
@@ -37,12 +36,12 @@ class Home extends React.Component {
         <Route
           exact
           path="/"
-          render={() => <Article articles={this.state.articles} />}
-        />
-        <Route
-          exact
-          path="/"
-          render={() => <Tag updateArticle={this.updateArticle} />}
+          render={() => (
+            <>
+              <Article articles={this.state.articles} />
+              <Tag updateArticle={this.updateArticle} />
+            </>
+          )}
         />
         <Route
           exact
@@ -59,4 +58,5 @@ class Home extends React.Component {
   }
 }
 
+// change multiple routes in one
 export default Home;
