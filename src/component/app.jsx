@@ -49,7 +49,6 @@ class App extends React.Component {
   }
   updateLoggedIn = value => {
     this.setState({ isLoggedIn: value });
-    localStorage.clear();
   };
   componentDidMount() {
     console.log("cdm");
