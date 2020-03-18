@@ -25,7 +25,11 @@ class Signup extends React.Component {
       })
     })
       .then(res => res.json())
-      .then(userDate => console.log(userDate));
+      .then(userDate => {
+        if (!userDate.error) {
+          this.props.history.push("/login");
+        }
+      });
   };
 
   render() {

@@ -15,19 +15,25 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: localStorage.getItem("isLogged")
+      isLoggedIn: localStorage.getItem("isLogged") || false
     };
   }
+  updateLoggedIn = value => {
+    this.setState({ isLoggedIn: value });
+  };
 
   render() {
     console.log(this.state.articles);
     return (
       <div className="home_page_devision">
-        <Header />
+        <Header isLoggedIn={this.state.isLoggedIn} />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/tags/:tag" component={Home} />
-          <Route path="/login" component={Login} />
+          <Route
+            path="/login"
+            render={() => <Login updateLoggedIn={this.updateLoggedIn} />}
+          />
           <Route path="/user" component={UserDetails} />
           <Route path="/signup" component={Signup} />
           <Route path="/editor" component={NewArticle} />
