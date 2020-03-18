@@ -19,13 +19,14 @@ class Login extends React.Component {
       })
     })
       .then(res => res.json())
-      .then(userdate => {
-        if (userdate.errors) {
-          this.props.updateLoggedIn("false");
-          localStorage.setItem("isLogged", "false");
+      .then(userData => {
+        if (userData.errors) {
+          // this.props.updateLoggedIn("false");
+          // localStorage.setItem("isLogged", "false");
         } else {
-          localStorage.setItem("isLogged", "true");
-          this.props.updateLoggedIn("true");
+          // console.log(userData.user.token);
+          localStorage.setItem("conduit-token", userData.user.token);
+          // this.props.updateLoggedIn("true");
           this.props.history.push("/");
         }
       });

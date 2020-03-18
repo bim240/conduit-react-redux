@@ -77,6 +77,22 @@ const Header = props => {
                 </div>
               </div>
             </NavLink>
+            {/* logout */}
+            <NavLink
+              activeClassName="active_icon"
+              to="/user"
+              className="colorful_circle1"
+            >
+              <div className="colorful_circle2">
+                <div className="icon">
+                  <IconContext.Provider value={{ className: "icon_shadow" }}>
+                    <div>
+                      <IoMdLogOut />
+                    </div>
+                  </IconContext.Provider>
+                </div>
+              </div>
+            </NavLink>
           </>
         ) : (
           <>
