@@ -43,11 +43,13 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: false
+      isLoggedIn: false,
+      userInfo: null
     };
   }
   updateLoggedIn = value => {
     this.setState({ isLoggedIn: value });
+    localStorage.clear();
   };
   componentDidMount() {
     console.log("cdm");
@@ -70,14 +72,15 @@ class App extends React.Component {
     console.log(this.state.isLoggedIn);
     return (
       <div className="home_page_devision">
-        <Header isLoggedIn={this.state.isLoggedIn} />
+        <Header
+          isLoggedIn={this.state.isLoggedIn}
+          updateLoggedIn={this.updateLoggedIn}
+        />
         {this.state.isLoggedIn ? (
           <Auth />
         ) : (
           <NoAuth updateLoggedIn={this.updateLoggedIn} />
         )}
-
-        {/* <Route exact path="/article/:slug" component={ArticleByTag} /> */}
       </div>
     );
   }

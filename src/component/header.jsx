@@ -6,6 +6,7 @@ import { IoMdLogIn, IoMdLogOut } from "react-icons/io";
 import { MdSettings } from "react-icons/md";
 
 const Header = props => {
+  console.log("inside header");
   return (
     <div className="header">
       {/* <h1>header section</h1> */}
@@ -79,8 +80,9 @@ const Header = props => {
             </NavLink>
             {/* logout */}
             <NavLink
+              onClick={() => props.updateLoggedIn(false)}
               activeClassName="active_icon"
-              to="/user"
+              to="/"
               className="colorful_circle1"
             >
               <div className="colorful_circle2">
