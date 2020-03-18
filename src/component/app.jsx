@@ -63,8 +63,7 @@ class App extends React.Component {
       })
         .then(res => res.json())
         // .then(res => console.log(res));
-        .then(res => this.setState({ isLoggedIn: true }))
-        .catch(err => this.setState({ isLoggedIn: false }));
+        .then(res => this.setState({ isLoggedIn: true }));
     }
   }
 

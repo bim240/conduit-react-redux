@@ -15,7 +15,10 @@ class Login extends React.Component {
         "Content-Type": "Application/json"
       },
       body: JSON.stringify({
-        user: { email: "bimlendu357@gmail.com", password: "123456789" }
+        user: {
+          email: this.email.current.value,
+          password: this.password.current.value
+        }
       })
     })
       .then(res => res.json())
@@ -24,7 +27,7 @@ class Login extends React.Component {
           // this.props.updateLoggedIn("false");
           // localStorage.setItem("isLogged", "false");
         } else {
-          // console.log(userData.user.token);
+          console.log(this.props, "props");
           localStorage.setItem("conduit-token", userData.user.token);
           // this.props.updateLoggedIn("true");
           this.props.history.push("/");
