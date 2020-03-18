@@ -5,6 +5,7 @@ import Header from "./header";
 import Home from "./home";
 import Login from "./login";
 import Signup from "./signup";
+import UserDetails from "./userDetails";
 import Setting from "./loogeduser/setting";
 import NewArticle from "./loogeduser/createArticle";
 import ArticleDetails from "./articleDetails";
@@ -13,8 +14,11 @@ import "../assets/stylesheets/main.scss";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      isLoggedIn: localStorage.getItem("isLogged")
+    };
   }
+
   render() {
     console.log(this.state.articles);
     return (
@@ -24,6 +28,7 @@ class App extends React.Component {
           <Route exact path="/" component={Home} />
           <Route path="/tags/:tag" component={Home} />
           <Route path="/login" component={Login} />
+          <Route path="/user" component={UserDetails} />
           <Route path="/signup" component={Signup} />
           <Route path="/editor" component={NewArticle} />
           <Route path="/setting" component={Setting} />
@@ -38,19 +43,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-// const React.App = () => {
-//   return (
-//     <div className="home_page_devision">
-//       <Header />
-//       <Route exact path="/" component={Article} />
-//       <Route exact path="/" component={Tag} />
-//       <Route exact path="/login" component={Login} />
-//       <Route exact path="/signup" component={Signup} />
-//       <Route exact path="/editor" component={NewArticle} />
-//       <Route exact path="/setting" component={Setting} />
-//     </div>
-//   );
-// };
-
-// export default App;

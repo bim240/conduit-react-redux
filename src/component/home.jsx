@@ -20,8 +20,9 @@ class Home extends React.Component {
     // console.log(this.articles);
     // .then(res => console.log("hello"));
   }
-  updateArticle = (url, tagName) => {
+  updateArticle = (tagName, url) => {
     if (tagName === "all") {
+      console.log("called");
       fetchData(
         "https://conduit.productionready.io/api/articles?limit=10&offset=0"
       ).then(res => this.setState({ articles: res }));
@@ -38,7 +39,10 @@ class Home extends React.Component {
           path="/"
           render={() => (
             <>
-              <Article articles={this.state.articles} />
+              <Article
+                articles={this.state.articles}
+                updateArticle={this.updateArticle}
+              />
               <Tag updateArticle={this.updateArticle} />
             </>
           )}
@@ -46,13 +50,21 @@ class Home extends React.Component {
         <Route
           exact
           path="/tags/:tags"
-          render={() => <Article articles={this.state.articles} />}
+          render={() => (
+            <>
+              <Article
+                articles={this.state.articles}
+                updateArticle={this.updateArticle}
+              />
+              <Tag updateArticle={this.updateArticle} />
+            </>
+          )}
         />
-        <Route
+        {/* <Route
           exact
           path="/tags/:tags"
           render={() => <Tag updateArticle={this.updateArticle} />}
-        />
+        /> */}
       </>
     );
   }

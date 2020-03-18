@@ -1,6 +1,33 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 class Signup extends React.Component {
-  state = {};
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.email = React.createRef();
+    this.username = React.createRef();
+    this.password = React.createRef();
+  }
+  handleSignup = () => {
+    console.log("inside signup");
+    fetch(`https://conduit.productionready.io/api/users`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "Application/json"
+      },
+      body: JSON.stringify({
+        user: {
+          username: this.username.current.value,
+          email: this.email.current.value,
+          password: this.password.current.value
+        }
+      })
+    })
+      .then(res => res.json())
+      .then(userDate => console.log(userDate));
+  };
+
   render() {
     return (
       <>
@@ -16,6 +43,7 @@ class Signup extends React.Component {
               name="username"
               id="signup_name"
               autocomplete="off"
+              ref={this.username}
             />
             <label for="signup_email" className="signup_label">
               {" "}
@@ -26,18 +54,29 @@ class Signup extends React.Component {
               name="email"
               id="signup_email"
               autocomplete="off"
+              ref={this.email}
             />
             <label className="signup_label" for="signup_password">
               {" "}
               Password
             </label>
-            <input type="password" name="Password" id="signup_password" />
+            <input
+              type="password"
+              name="Password"
+              id="signup_password"
+              ref={this.password}
+            />
             <label className="signup_label" for="signup_repassword">
               {" "}
               Re-enter Password
             </label>
             <input type="password" name="Password" id="signup_repassword" />
-            <input type="button" value="Signup" id="signup_btn" />
+            <input
+              onClick={this.handleSignup}
+              type="button"
+              value="Signup"
+              id="signup_btn"
+            />
           </form>
         </div>
       </>

@@ -29,7 +29,11 @@ class Article extends React.Component {
         <div className="article_sub_container">
           <div className="feed_type">
             <Link
-              onclick={() => this.setState({ activeMenu: "global" })}
+              onclick={() => {
+                this.setState({ activeMenu: "global" });
+                console.log("this.props.updateArticle()");
+                this.props.updateArticle("all", "hey");
+              }}
               to="/"
               className={`article_heading ${
                 this.state.activeMenu === "global"

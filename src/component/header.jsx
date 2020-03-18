@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { FaHome, FaEdit, FaRegRegistered } from "react-icons/fa";
+import { FaHome, FaEdit, FaRegRegistered, FaUserAlt } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import { IoMdLogIn, IoMdLogOut } from "react-icons/io";
 import { MdSettings } from "react-icons/md";
@@ -85,6 +85,22 @@ const Header = () => {
               <IconContext.Provider value={{ className: "icon_shadow" }}>
                 <div>
                   <MdSettings />
+                </div>
+              </IconContext.Provider>
+            </div>
+          </div>
+        </NavLink>
+        {/* user profile */}
+        <NavLink
+          activeClassName="active_icon"
+          to="/user"
+          className="colorful_circle1"
+        >
+          <div className="colorful_circle2">
+            <div className="icon">
+              <IconContext.Provider value={{ className: "icon_shadow" }}>
+                <div>
+                  <FaUserAlt />
                 </div>
               </IconContext.Provider>
             </div>

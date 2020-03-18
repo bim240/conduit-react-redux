@@ -28,8 +28,8 @@ class Tag extends React.Component {
                   to={`/tags/${tag}`}
                   onClick={event =>
                     this.props.updateArticle(
-                      this.state.url + this.props.match.params.tags,
-                      "notAll"
+                      "notAll",
+                      this.state.url + this.props.match.params.tags
                     )
                   }
                   className="single_tags"
