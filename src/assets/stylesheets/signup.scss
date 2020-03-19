@@ -62,9 +62,8 @@
   border-radius: 25px;
   border: none;
   outline: none;
-  box-shadow: 7px 7px 15px #bbcfda, -4px -4px 13px #fff,
-    inset 4px 4px 8px rgba(209, 217, 230, 0.2),
-    inset -8px -8px 8px rgba(255, 255, 255, 0.2);
+  box-shadow: inset 4px 4px 8px rgba(209, 217, 230, 0.8),
+    inset -8px -8px 8px rgba(255, 255, 255, 0.8);
   background-color: #e8eff5;
   transition: all 400ms;
   /* border: 1px solid rgba(255, 255, 255, 0.3); */
@@ -92,10 +91,10 @@
 }
 
 #signup_password:focus {
-    height: 2.5rem;
-    box-shadow: inset 7px 7px 15px #bbcfda, inset -4px -4px 13px #fff,
-      4px 4px 8px rgba(209, 217, 230, 0.2), -8px -8px 8px rgba(255, 255, 255, 0.2);
-    background-color: #e8eff5;
+  height: 2.5rem;
+  box-shadow: inset 7px 7px 15px #bbcfda, inset -4px -4px 13px #fff,
+    4px 4px 8px rgba(209, 217, 230, 0.2), -8px -8px 8px rgba(255, 255, 255, 0.2);
+  background-color: #e8eff5;
   /* border: 1px solid rgba(255, 255, 255, 0.3); */
 }
 #signup_email:focus {
