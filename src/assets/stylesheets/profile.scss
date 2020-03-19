@@ -1,0 +1,61 @@
+.profile_main_conatiner {
+  grid-column-start: 2;
+  grid-column-end: column3-end;
+  background: #e8eff5;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  // flex-direction: column;
+  height: 90vh;
+  width: 90%;
+  margin: 2rem auto;
+  border-radius: 25px;
+  font-family: "Roboto", sans-serif;
+  border: 1px solid green;
+  box-shadow: 7px 7px 15px #bbcfda, -7px -7px 15px #fff;
+  padding: 1rem;
+  /* cursor: cell; */
+}
+.userInfo_container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.5rem;
+  border: 1px solid green;
+  width: 90%;
+  border: 1px solid green;
+  box-shadow: 7px 7px 15px #bbcfda, -7px -7px 15px #fff;
+}
+.profile_image {
+  height: 90px;
+  width: 90px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #d1d7dd, #f8ffff);
+  box-shadow: 6px 6px 13px #909498, -6px -6px 13px #ffffff;
+}
+.user_details_container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-around;
+  // padding: 1rem;
+}
+.user_name {
+  // width: 100%;
+  margin-left: 1rem;
+  // text-transform: capitalize;
+  font-weight: 900;
+  font-size: 1.2rem;
+}
+.user_bio {
+  // width: 100%;
+  margin-left: 1rem;
+  // text-transform: capitalize;
+  font-weight: 900;
+  font-size: 1rem;
+}
+.edit_setting {
+  margin-left: 1rem;
+  // text-transform: capitalize;
+  font-weight: 900;
+  font-size: 0.8rem;
+}

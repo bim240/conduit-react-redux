@@ -29,7 +29,7 @@ class Login extends React.Component {
         } else {
           console.log(this.props, "props");
           localStorage.setItem("conduit-token", userData.user.token);
-          this.props.updateLoggedIn("true");
+          this.props.updateLoggedIn("true", userData);
           this.props.history.push("/");
         }
       });

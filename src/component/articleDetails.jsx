@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React from "react";
 
 class AricleDetails extends React.Component {
   constructor(props) {

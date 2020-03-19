@@ -22,7 +22,7 @@ class Home extends React.Component {
   }
   updateArticle = (tagName, url) => {
     if (tagName === "all") {
-      console.log("called");
+      // console.log("called");
       fetchData(
         "https://conduit.productionready.io/api/articles?limit=10&offset=0"
       ).then(res => this.setState({ articles: res }));
