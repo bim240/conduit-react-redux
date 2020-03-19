@@ -9,7 +9,7 @@ const Header = props => {
   console.log("inside header");
   return (
     <div className="header">
-      {props ? console.log("in props header") : console.log("False condition")}
+      {/* {props ? console.log("in props header") : console.log("False condition")} */}
       {/* <h1>header section</h1> */}
       <div className="header_subcontainer">
         {/* home icon */}

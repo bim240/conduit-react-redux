@@ -16,10 +16,7 @@ class Article extends React.Component {
   }
 
   render() {
-    console.log(
-      "inside articles",
-      this.props.articles && this.props.articles.articles
-    );
+    console.log("inside articles", this.props.articles);
     // this.state.articles &&
     //   this.state.articles.articles.forEach(article => {
     //     console.log(article);
@@ -27,60 +24,31 @@ class Article extends React.Component {
     return this.props.articles ? (
       <div className="article_main_conatiner">
         <div className="article_sub_container">
-          <div className="feed_type">
-            <Link
-              onclick={() => {
-                this.setState({ activeMenu: "global" });
-                console.log("this.props.updateArticle()");
-                this.props.updateArticle("all", "hey");
-              }}
-              to="/"
-              className={`article_heading ${
-                this.state.activeMenu === "global"
-                  ? "article_heading_active"
-                  : ""
-              }`}
-            >
-              {" "}
-              Global
-            </Link>
-            <Link
-              onclick={() => this.setState({ activeMenu: "feed" })}
-              to="/"
-              className={`article_heading ${
-                this.state.activeMenu === "feed" ? "article_heading_active" : ""
-              }`}
-            >
-              {" "}
-              Feed
-            </Link>
-            <Link
-              onclick={() => this.setState({ activeMenu: "tag" })}
-              to="/"
-              className={`article_heading ${
-                this.state.activeMenu === "tag" ? "article_heading_active" : ""
-              }`}
-            >
-              {" "}
-              Tag
-            </Link>
-          </div>
-
           <div className="all_article_container">
             {this.props.articles &&
               this.props.articles.articles.map(article => {
+                // var d = new Date(article.updatedAt);
+                // console.log(d.;
                 return (
                   <div className="single_article">
                     <div className="author_section">
                       <div className="author_image">
                         {" "}
-                        <img src={article.author.image} alt="img"></img>
+                        <img
+                          title="profile"
+                          src={article.author.image}
+                          alt="img"
+                        ></img>
                       </div>
                       <div>
                         <div className="author_name">
                           {article.author.username}
                         </div>
-                        <div className="article_date">{article.updatedAt}</div>
+                        <div className="article_date">
+                          {new Date(article.updatedAt)
+                            .toUTCString()
+                            .slice(0, -4)}
+                        </div>
                       </div>
                     </div>
                     <div className="article_content">
@@ -107,7 +75,7 @@ class Article extends React.Component {
                         <IconContext.Provider
                           value={{ className: "article_like_icon" }}
                         >
-                          <div>
+                          <div title="like">
                             <IoMdHeart />
                           </div>
                         </IconContext.Provider>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 
 import Article from "./article";
 import Tag from "./tags";
@@ -10,7 +10,8 @@ class Home extends React.Component {
     super(props);
     this.state = {
       articles: null,
-      tag: "all"
+      tag: "all",
+      activeMenu: "global"
     };
   }
   componentDidMount() {
