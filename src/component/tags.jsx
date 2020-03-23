@@ -17,28 +17,30 @@ class Tag extends React.Component {
   }
   render() {
     return (
-      <div className="tag_main_container">
-        <div className="tag_heading">Tags</div>
-        <div className="all_tag_container">
-          {this.state.tags &&
-            this.state.tags.tags.map(tag => {
-              return (
-                <NavLink
-                  activeClassName="active_tag"
-                  to={`/tags/${tag}`}
-                  onClick={event =>
-                    this.props.updateArticle(
-                      "notAll",
-                      this.state.url + this.props.match.params.tags
-                    )
-                  }
-                  className="single_tags"
-                >
-                  {tag}{" "}
-                </NavLink>
-              );
-            })}
-          {/* <div className="clear_filter"> Clear All</div> */}
+      <div className="fixed">
+        <div className="tag_main_container">
+          <div className="tag_heading">Tags</div>
+          <div className="all_tag_container">
+            {this.state.tags &&
+              this.state.tags.tags.map(tag => {
+                return (
+                  <NavLink
+                    activeClassName="active_tag"
+                    to={`/tags/${tag}`}
+                    onClick={event =>
+                      this.props.updateArticle(
+                        "notAll",
+                        this.state.url + this.props.match.params.tags
+                      )
+                    }
+                    className="single_tags"
+                  >
+                    {tag}{" "}
+                  </NavLink>
+                );
+              })}
+            {/* <div className="clear_filter"> Clear All</div> */}
+          </div>
         </div>
       </div>
     );

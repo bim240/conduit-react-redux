@@ -1,6 +1,7 @@
 import React from "react";
 import { withRouter, Link, NavLink } from "react-router-dom";
 
+import { AiFillLike } from "react-icons/ai";
 import { IconContext } from "react-icons";
 import { IoMdHeart } from "react-icons/io";
 import { GiSelfLove } from "react-icons/gi";
@@ -66,7 +67,7 @@ class Article extends React.Component {
                           value={{ className: "article_like_icon" }}
                         >
                           <div>
-                            <GiSelfLove />
+                            <AiFillLike />
                           </div>
                         </IconContext.Provider>
                       </div>
