@@ -48,7 +48,7 @@ class Article extends React.Component {
                         <div className="article_date">
                           {new Date(article.updatedAt)
                             .toUTCString()
-                            .slice(0, -4)}
+                            .slice(0, -13)}
                         </div>
                       </div>
                     </div>

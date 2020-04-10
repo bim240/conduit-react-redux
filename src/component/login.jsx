@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
 class Login extends React.Component {
@@ -12,29 +13,30 @@ class Login extends React.Component {
     fetch(`https://conduit.productionready.io/api/users/login`, {
       method: "POST",
       headers: {
-        "Content-Type": "Application/json"
+        "Content-Type": "Application/json",
       },
       body: JSON.stringify({
         user: {
           email: this.email.current.value,
-          password: this.password.current.value
-        }
-      })
+          password: this.password.current.value,
+        },
+      }),
     })
-      .then(res => res.json())
-      .then(userData => {
+      .then((res) => res.json())
+      .then((userData) => {
         if (userData.errors) {
           // this.props.updateLoggedIn("false");
           // localStorage.setItem("isLogged", "false");
         } else {
-          console.log(this.props, "props");
+          // console.log(this.props, "props");
+          this.props.dispatch({ type: "LOGIN", payload: userData.user });
           localStorage.setItem("conduit-token", userData.user.token);
-          this.props.updateLoggedIn("true", userData);
           this.props.history.push("/");
         }
       });
   };
   render() {
+    console.log(this.props, "login props");
     return (
       <>
         <div className="login_container">
@@ -74,4 +76,10 @@ class Login extends React.Component {
   }
 }
 
-export default withRouter(Login);
+function mapStateToProps(state) {
+  return {
+    userInfo: state.userReducer.userInfo,
+  };
+}
+
+export default connect(mapStateToProps)(withRouter(Login));

@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
 
 import Header from "./header";
 import Home from "./home";
@@ -17,10 +18,7 @@ function Auth(newprops) {
     <Switch>
       <Route exact path="/" component={Home} />
       <Route path="/tags/:tag" component={Home} />
-      <Route
-        path="/user"
-        render={() => <Profile userInfo={newprops.userInfo} />}
-      />
+      <Route path="/user" render={() => <Profile />} />
       <Route path="/editor" component={NewArticle} />
       <Route path="/article/:slug" component={ArticleDetails} />
       <Route path="/setting" component={Setting} />
@@ -33,10 +31,7 @@ function NoAuth(newprops) {
     <Switch>
       <Route exact path="/" component={Home} />
       <Route path="/tags/:tag" component={Home} />
-      <Route
-        path="/login"
-        render={() => <Login updateLoggedIn={newprops.updateLoggedIn} />}
-      />
+      <Route path="/login" render={() => <Login />} />
       <Route path="/signup" component={Signup} />
       \<Route path="/article/:slug" component={ArticleDetails} />
       <Route path="*" render={() => <h1>404 Page</h1>} />
@@ -47,15 +42,8 @@ function NoAuth(newprops) {
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isLoggedIn: false,
-      userInfo: null
-    };
   }
-  updateLoggedIn = (value, userData) => {
-    this.setState({ isLoggedIn: value });
-    this.setState({ userInfo: userData });
-  };
+
   componentDidMount() {
     // console.log("cdm");
     console.log(localStorage["conduit-token"]);
@@ -63,34 +51,31 @@ class App extends React.Component {
       fetch(`https://conduit.productionready.io/api/user`, {
         method: "GET",
         headers: {
-          authorization: `Token ${localStorage["conduit-token"]}`
-        }
+          authorization: `Token ${localStorage["conduit-token"]}`,
+        },
       })
-        .then(res => res.json())
+        .then((res) => res.json())
         // .then(res => console.log(res));
-        .then(res => {
-          this.setState({ isLoggedIn: true });
-          this.setState({ userInfo: res });
+        .then((res) => {
+          this.props.dispatch({ type: "LOGIN", payload: res.user });
         });
     }
   }
 
   render() {
-    console.log(this.state.isLoggedIn);
+    // console.log(commonStore);
     return (
       <div className="home_page_devision">
-        <Header
-          isLoggedIn={this.state.isLoggedIn}
-          updateLoggedIn={this.updateLoggedIn}
-        />
-        {this.state.isLoggedIn ? (
-          <Auth userInfo={this.state.userInfo} />
-        ) : (
-          <NoAuth updateLoggedIn={this.updateLoggedIn} />
-        )}
+        <Header />
+
+        {this.props.userInfo ? <Auth /> : <NoAuth />}
       </div>
     );
   }
 }
-
-export default App;
+function mapStateToProps(state) {
+  return state.userReducer.userInfo
+    ? { userInfo: state.userReducer.userInfo }
+    : null;
+}
+export default connect(mapStateToProps)(App);

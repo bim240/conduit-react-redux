@@ -1,5 +1,6 @@
 import React from "react";
-import { Route, Link } from "react-router-dom";
+import { Route } from "react-router-dom";
+import { connect } from "react-redux";
 
 import Article from "./article";
 import Tag from "./tags";
@@ -11,13 +12,13 @@ class Home extends React.Component {
     this.state = {
       articles: null,
       tag: "all",
-      activeMenu: "global"
+      activeMenu: "global",
     };
   }
   componentDidMount() {
     fetchData(
       "https://conduit.productionready.io/api/articles?limit=10&offset=0"
-    ).then(res => this.setState({ articles: res }));
+    ).then((res) => this.setState({ articles: res }));
     // console.log(this.articles);
     // .then(res => console.log("hello"));
   }
@@ -26,9 +27,9 @@ class Home extends React.Component {
       // console.log("called");
       fetchData(
         "https://conduit.productionready.io/api/articles?limit=10&offset=0"
-      ).then(res => this.setState({ articles: res }));
+      ).then((res) => this.setState({ articles: res }));
     } else {
-      fetchData(url).then(res => this.setState({ articles: res }));
+      fetchData(url).then((res) => this.setState({ articles: res }));
       // .then(res => console.log(url));
     }
   };
@@ -70,6 +71,12 @@ class Home extends React.Component {
     );
   }
 }
+function mapStateToProps(state) {
+  // console.log(state.userReducer.userInfo, "inside home state");
+  return state.userReducer.userInfo
+    ? { userInfo: state.userReducer.userInfo }
+    : null;
+}
 
 // change multiple routes in one
-export default Home;
+export default connect(mapStateToProps)(Home);

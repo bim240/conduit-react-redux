@@ -1,14 +1,19 @@
 import React from "react";
+import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { FaHome, FaEdit, FaRegRegistered, FaUserAlt } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import { IoMdLogIn, IoMdLogOut } from "react-icons/io";
 import { MdSettings } from "react-icons/md";
 
-const Header = props => {
-  console.log("inside header");
+const Header = (props) => {
+  const handleLogout = (props) => {
+    localStorage.removeItem("conduit-token");
+    props.dispatch({ type: "LOGOUT", payload: null });
+  };
+  console.log(props, "inside header");
   return (
-    <div className="fixed">
+    <div className="fixed_header">
       <div className="header">
         {/* {props ? console.log("in props header") : console.log("False condition")} */}
         {/* <h1>header section</h1> */}
@@ -30,7 +35,7 @@ const Header = props => {
             </div>
           </NavLink>
 
-          {props.isLoggedIn ? (
+          {props.userInfo ? (
             <>
               {/* add article */}
               <NavLink
@@ -82,7 +87,7 @@ const Header = props => {
               </NavLink>
               {/* logout */}
               <NavLink
-                onClick={() => props.updateLoggedIn(false)}
+                onClick={() => handleLogout(props)}
                 activeClassName="active_icon"
                 to="/"
                 className="colorful_circle1"
@@ -140,5 +145,11 @@ const Header = props => {
     </div>
   );
 };
+// consume
+function mapStateToProps(state) {
+  return state.userReducer.userInfo
+    ? { userInfo: state.userReducer.userInfo }
+    : null;
+}
 
-export default Header;
+export default connect(mapStateToProps)(Header);

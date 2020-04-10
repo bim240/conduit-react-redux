@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 import { FaUserEdit } from "react-icons/fa";
 
@@ -10,12 +11,12 @@ class Profile extends React.Component {
     super(props);
     this.state = {
       user: null,
-      article: null
+      article: null,
     };
   }
   componentDidUpdate(prevProps, prevState) {
     if (this.state.user !== prevState.user) {
-      this.setState({ user: this.props.userInfo.user });
+      this.setState({ user: this.props.userInfo });
       // console.log(this.state.user, "fetch");
 
       fetch(
@@ -23,31 +24,31 @@ class Profile extends React.Component {
         {
           method: "GET",
           headers: {
-            authorization: `Token ${localStorage["conduit-token"]}`
-          }
+            authorization: `Token ${localStorage["conduit-token"]}`,
+          },
         }
       )
-        .then(res => res.json())
-        .then(res => this.setState({ article: res }));
+        .then((res) => res.json())
+        .then((res) => this.setState({ article: res }));
     }
   }
   componentDidMount() {
     fetch(`https://conduit.productionready.io/api/user`, {
       method: "GET",
       headers: {
-        authorization: `Token ${localStorage["conduit-token"]}`
-      }
+        authorization: `Token ${localStorage["conduit-token"]}`,
+      },
     })
-      .then(res => res.json())
+      .then((res) => res.json())
       // .then(res => console.log(res));
-      .then(res => {
+      .then((res) => {
         this.setState({ user: res.user });
         // this.setState({ userInfo: res });
       });
   }
   render() {
     // console.log(this.props.userInfo, "render");
-    console.log(this.state.article, "state");
+    console.log(this.props, "state profile state");
 
     return this.state.user ? (
       <>
@@ -88,4 +89,9 @@ class Profile extends React.Component {
   }
 }
 
-export default withRouter(Profile);
+function mapStateToProps(state) {
+  return state.userReducer.userInfo
+    ? { userInfo: state.userReducer.userInfo }
+    : null;
+}
+export default connect(mapStateToProps)(withRouter(Profile));
