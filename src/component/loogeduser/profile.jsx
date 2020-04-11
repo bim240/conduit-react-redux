@@ -14,68 +14,52 @@ class Profile extends React.Component {
       article: null,
     };
   }
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.user !== prevState.user) {
-      this.setState({ user: this.props.userInfo });
-      // console.log(this.state.user, "fetch");
 
-      fetch(
-        `https://conduit.productionready.io/api/articles?author=${this.state.user.username}&limit=5&offset=0`,
-        {
-          method: "GET",
-          headers: {
-            authorization: `Token ${localStorage["conduit-token"]}`,
-          },
-        }
-      )
-        .then((res) => res.json())
-        .then((res) => this.setState({ article: res }));
-    }
-  }
   componentDidMount() {
-    fetch(`https://conduit.productionready.io/api/user`, {
-      method: "GET",
-      headers: {
-        authorization: `Token ${localStorage["conduit-token"]}`,
-      },
-    })
+    fetch(
+      `https://conduit.productionready.io/api/articles?author=${this.props.user.username}&limit=5&offset=0`,
+      {
+        method: "GET",
+        headers: {
+          authorization: `Token ${localStorage["conduit-token"]}`,
+        },
+      }
+    )
       .then((res) => res.json())
-      // .then(res => console.log(res));
-      .then((res) => {
-        this.setState({ user: res.user });
-        // this.setState({ userInfo: res });
-      });
+      .then((res) =>
+        this.props.dispatch({ type: "ADD_ARTICLES", payload: res })
+      );
   }
   render() {
     // console.log(this.props.userInfo, "render");
     console.log(this.props, "state profile state");
 
-    return this.state.user ? (
+    return this.props.user ? (
       <>
         <section className="profile_main_conatiner">
           <div className="userInfo_container">
             <div className="profile_image">
-              <img src={this.state.user.image} alt="img"></img>
+              <img src={this.props.user.image} alt="img"></img>
             </div>
             <div className="user_details_container">
               <div className="user_name">
-                {this.state.user.username || "Dude write your name"}
+                {this.props.user.username || "Dude write your name"}
               </div>
-              <div className="user_bio">{this.state.user.bio}</div>
+              <div className="user_bio">{this.props.user.bio}</div>
               <Link to="/setting" className="edit_setting">
                 <FaUserEdit className="color_red" />
                 <div className="margin_left">Edit</div>{" "}
               </Link>
             </div>
           </div>
-          {this.state.article ? (
+          {this.props.articles ? (
             <div className="feed_container">
               <div className="feed_heading">
                 <div className="feed_name"> My Articles</div>
                 <div className="feed_name"> Favorited Articles</div>
               </div>
               <div className="feed_body">
-                <Article articles={this.state.article} />
+                <Article articles={this.props.articles} />
               </div>
             </div>
           ) : (
@@ -90,8 +74,10 @@ class Profile extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return state.userReducer.userInfo
-    ? { userInfo: state.userReducer.userInfo }
-    : null;
+  console.log(state);
+  return {
+    user: state.userReducer.userInfo ? state.userReducer.userInfo : null,
+    articles: state.articleReducer ? state.articleReducer.articles : null,
+  };
 }
 export default connect(mapStateToProps)(withRouter(Profile));

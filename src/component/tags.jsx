@@ -1,20 +1,41 @@
 import React from "react";
 import { withRouter, NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+import { fetchData } from "../utils";
 
 class Tag extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       url:
-        "https://conduit.productionready.io/api/articles?limit=10&offset=0&tag="
+        "https://conduit.productionready.io/api/articles?limit=10&offset=0&tag=",
     };
   }
   componentDidMount() {
     fetch("https://conduit.productionready.io/api/tags")
-      .then(res => res.json())
-      .then(res => this.setState({ tags: res }));
+      .then((res) => res.json())
+      .then((res) => {
+        this.setState({ tags: res });
+        this.props.dispatch({ type: "ADD_TAGS", payload: res });
+      });
     // console.log(this.state.tags);
   }
+
+  updateArticle = (tagName, url) => {
+    this.props.dispatch({ type: "ACTIVE_TAGS", payload: tagName });
+    if (tagName === "all") {
+      fetchData(
+        "https://conduit.productionready.io/api/articles?limit=10&offset=0"
+      ).then((res) =>
+        this.props.dispatch({ type: "ADD_ARTICLES", payload: res })
+      );
+    } else {
+      localStorage.setItem("active-tag", tagName);
+      fetchData(url).then((res) =>
+        this.props.dispatch({ type: "ADD_ARTICLES", payload: res })
+      );
+    }
+  };
   render() {
     return (
       <div className="fixed">
@@ -22,14 +43,14 @@ class Tag extends React.Component {
           <div className="tag_heading">Tags</div>
           <div className="all_tag_container">
             {this.state.tags &&
-              this.state.tags.tags.map(tag => {
+              this.state.tags.tags.map((tag) => {
                 return (
                   <NavLink
                     activeClassName="active_tag"
                     to={`/tags/${tag}`}
-                    onClick={event =>
-                      this.props.updateArticle(
-                        "notAll",
+                    onClick={(event) =>
+                      this.updateArticle(
+                        tag,
                         this.state.url + this.props.match.params.tags
                       )
                     }
@@ -47,4 +68,4 @@ class Tag extends React.Component {
   }
 }
 
-export default withRouter(Tag);
+export default connect()(withRouter(Tag));

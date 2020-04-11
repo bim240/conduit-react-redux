@@ -10,30 +10,39 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      articles: null,
       tag: "all",
-      activeMenu: "global",
     };
   }
   componentDidMount() {
-    fetchData(
-      "https://conduit.productionready.io/api/articles?limit=10&offset=0"
-    ).then((res) => this.setState({ articles: res }));
-    // console.log(this.articles);
-    // .then(res => console.log("hello"));
+    if (!this.props.activeTag) {
+      fetchData(
+        "https://conduit.productionready.io/api/articles?limit=10&offset=0"
+      ).then((res) => {
+        this.props.dispatch({ type: "ADD_ARTICLES", payload: res });
+      });
+    } else {
+      fetchData(
+        `https://conduit.productionready.io/api/articles?limit=10&offset=0&tag=${this.props.activeTag}`
+      ).then((res) => {
+        this.props.dispatch({ type: "ADD_ARTICLES", payload: res });
+      });
+    }
   }
   updateArticle = (tagName, url) => {
     if (tagName === "all") {
-      // console.log("called");
       fetchData(
         "https://conduit.productionready.io/api/articles?limit=10&offset=0"
-      ).then((res) => this.setState({ articles: res }));
+      ).then((res) =>
+        this.props.dispatch({ type: "ADD_ARTICLES", payload: res })
+      );
     } else {
-      fetchData(url).then((res) => this.setState({ articles: res }));
-      // .then(res => console.log(url));
+      fetchData(url).then((res) =>
+        this.props.dispatch({ type: "ADD_ARTICLES", payload: res })
+      );
     }
   };
   render() {
+    // console.log(this.props, "props of home");
     return (
       <>
         <Route
@@ -42,7 +51,7 @@ class Home extends React.Component {
           render={() => (
             <>
               <Article
-                articles={this.state.articles}
+                articles={this.props.articles}
                 updateArticle={this.updateArticle}
               />
               <Tag updateArticle={this.updateArticle} />
@@ -54,11 +63,8 @@ class Home extends React.Component {
           path="/tags/:tags"
           render={() => (
             <>
-              <Article
-                articles={this.state.articles}
-                updateArticle={this.updateArticle}
-              />
-              <Tag updateArticle={this.updateArticle} />
+              <Article articles={this.props.articles} />
+              <Tag />
             </>
           )}
         />
@@ -71,11 +77,13 @@ class Home extends React.Component {
     );
   }
 }
+// consume
 function mapStateToProps(state) {
-  // console.log(state.userReducer.userInfo, "inside home state");
-  return state.userReducer.userInfo
-    ? { userInfo: state.userReducer.userInfo }
-    : null;
+  // console.log(state.tagsReducer.activeTag, "inside home state map to props");
+  return {
+    articles: state.articleReducer ? state.articleReducer.articles : null,
+    activeTag: state.tagsReducer ? state.tagsReducer.activeTag : null,
+  };
 }
 
 // change multiple routes in one

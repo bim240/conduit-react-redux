@@ -8,7 +8,7 @@ import { MdSettings } from "react-icons/md";
 
 const Header = (props) => {
   const handleLogout = (props) => {
-    localStorage.removeItem("conduit-token");
+    localStorage.clear();
     props.dispatch({ type: "LOGOUT", payload: null });
   };
   console.log(props, "inside header");

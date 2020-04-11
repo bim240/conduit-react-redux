@@ -1,33 +1,27 @@
 import React from "react";
-import { withRouter, Link, NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+import { withRouter, Link } from "react-router-dom";
 
 import { AiFillLike } from "react-icons/ai";
 import { IconContext } from "react-icons";
 import { IoMdHeart } from "react-icons/io";
-import { GiSelfLove } from "react-icons/gi";
 import Loader from "./loader";
 
 class Article extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      articles: this.props.articles,
-      activeMenu: "global"
-    };
+    this.state = {};
   }
 
   render() {
-    console.log("inside articles", this.props.articles);
-    // this.state.articles &&
-    //   this.state.articles.articles.forEach(article => {
-    //     console.log(article);
-    //   });
+    // console.log("inside articles", this.props);
+
     return this.props.articles ? (
       <div className="article_main_conatiner">
         <div className="article_sub_container">
           <div className="all_article_container">
             {this.props.articles &&
-              this.props.articles.articles.map(article => {
+              this.props.articles.map((article) => {
                 // var d = new Date(article.updatedAt);
                 // console.log(d.;
                 return (
@@ -94,4 +88,10 @@ class Article extends React.Component {
   }
 }
 
-export default withRouter(Article);
+// consume
+function mapStateToProps(state) {
+  // console.log(state, "inside articel section");
+  return {};
+}
+// mapStateToProps();
+export default connect(mapStateToProps)(withRouter(Article));
