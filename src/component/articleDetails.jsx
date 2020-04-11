@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 
 class AricleDetails extends React.Component {
   constructor(props) {
@@ -6,7 +7,7 @@ class AricleDetails extends React.Component {
     this.state = {
       article: null,
       following: this.article && this.state.article.article.author.following,
-      comments: []
+      comments: [],
     };
     this.comment = React.createRef(null);
   }
@@ -18,17 +19,17 @@ class AricleDetails extends React.Component {
         method: "POST",
         headers: {
           "Content-Type": "Application/json",
-          authorization: `Token ${localStorage["conduit-token"]}`
+          authorization: `Token ${localStorage["conduit-token"]}`,
         },
         body: JSON.stringify({
           comment: {
-            body: this.comment.current.value
-          }
-        })
+            body: this.comment.current.value,
+          },
+        }),
       }
     )
-      .then(res => res.json())
-      .then(res => {
+      .then((res) => res.json())
+      .then((res) => {
         this.setState({ comments: this.state.comments.concat(res.comment) });
         this.comment.current.value = "";
       });
@@ -40,47 +41,54 @@ class AricleDetails extends React.Component {
         {
           method: "POST",
           headers: {
-            authorization: `Token ${localStorage["conduit-token"]}`
-          }
+            authorization: `Token ${localStorage["conduit-token"]}`,
+          },
         }
       )
-        .then(res => res.json())
-        .then(res => this.setState({ following: true }));
+        .then((res) => res.json())
+        .then((res) => this.setState({ following: true }));
     }
     fetch(`https://conduit.productionready.io/api/profiles/txtest123/follow`, {
       method: "DELETE",
       headers: {
-        authorization: `Token ${localStorage["conduit-token"]}`
-      }
+        authorization: `Token ${localStorage["conduit-token"]}`,
+      },
     })
-      .then(res => res.json())
-      .then(res => this.setState({ following: false }));
+      .then((res) => res.json())
+      .then((res) => this.setState({ following: false }));
   };
   componentDidMount() {
     // article details
     fetch(
       `https://conduit.productionready.io/api/articles/${this.props.match.params.slug}`
     )
-      .then(res => res.json())
-      .then(res => this.setState({ article: res }));
+      .then((res) => res.json())
+      .then((res) => this.setState({ article: res }));
     // comments
     fetch(
       `https://conduit.productionready.io/api/articles/${this.props.match.params.slug}/comments`,
       {
         method: "GET",
         headers: {
-          authorization: `Token ${localStorage["conduit-token"]}`
-        }
+          authorization: `Token ${localStorage["conduit-token"]}`,
+        },
       }
     )
-      .then(res => res.json())
-      .then(res =>
+      .then((res) => res.json())
+      .then((res) =>
         this.setState({ comments: this.state.comments.concat(res.comments) })
       );
   }
   render() {
     var details = this.state.article;
-    console.log(this.state.comments);
+    console.log(this.props, "article detials props");
+    // let article =
+    //   this.props.articles &&
+    //   this.props.articles.filter((article) =>
+    //     console.log(article.slug, this.props.activeArticle)
+    //   );
+    // console.log(this.state.comments);
+    // console.log(article, "mapped article");
     return (
       <>
         {" "}
@@ -120,7 +128,7 @@ class AricleDetails extends React.Component {
                 <div className="comment_heading">Comments</div>
                 <div className="old_comments">
                   {this.state.comments.length > 0 ? (
-                    this.state.comments.map(comment => {
+                    this.state.comments.map((comment) => {
                       return (
                         <>
                           <div className="single_comment">
@@ -160,5 +168,18 @@ class AricleDetails extends React.Component {
     );
   }
 }
+// consume
 
-export default AricleDetails;
+function mapStateToProps(state) {
+  console.log(state.articleReducer, "article inside details");
+  return {
+    articles: state.articleReducer.articles
+      ? state.articleReducer.articles.articles
+      : null,
+    activeArticle: state.articleReducer
+      ? state.articleReducer.activeArticles
+      : null,
+  };
+}
+
+export default connect(mapStateToProps)(AricleDetails);

@@ -12,6 +12,9 @@ class Article extends React.Component {
     super(props);
     this.state = {};
   }
+  handleActiveArticle = (slug) => {
+    this.props.dispatch({ type: "ACTIVE_ARTICLES", payload: slug });
+  };
 
   render() {
     // console.log("inside articles", this.props);
@@ -48,6 +51,7 @@ class Article extends React.Component {
                     </div>
                     <div className="article_content">
                       <Link
+                        onClick={() => this.handleActiveArticle(article.slug)}
                         to={`/article/${article.slug}`}
                         className="article_title"
                       >

@@ -73,7 +73,9 @@ function mapStateToProps(state) {
   console.log(state);
   return {
     user: state.userReducer.userInfo ? state.userReducer.userInfo : null,
-    articles: state.articleReducer ? state.articleReducer.articles : null,
+    articles: state.articleReducer.articles
+      ? state.articleReducer.articles.articles
+      : null,
   };
 }
 export default connect(mapStateToProps)(withRouter(Profile));
