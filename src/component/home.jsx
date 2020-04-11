@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import Article from "./article";
 import Tag from "./tags";
 import { fetchData } from "../utils";
+import { storeArticles } from "../store/actions";
 
 class Home extends React.Component {
   constructor(props) {
@@ -18,13 +19,13 @@ class Home extends React.Component {
       fetchData(
         "https://conduit.productionready.io/api/articles?limit=10&offset=0"
       ).then((res) => {
-        this.props.dispatch({ type: "ADD_ARTICLES", payload: res });
+        this.props.dispatch(storeArticles(res));
       });
     } else {
       fetchData(
         `https://conduit.productionready.io/api/articles?limit=10&offset=0&tag=${this.props.activeTag}`
       ).then((res) => {
-        this.props.dispatch({ type: "ADD_ARTICLES", payload: res });
+        this.props.dispatch(storeArticles(res));
       });
     }
   }
@@ -32,13 +33,9 @@ class Home extends React.Component {
     if (tagName === "all") {
       fetchData(
         "https://conduit.productionready.io/api/articles?limit=10&offset=0"
-      ).then((res) =>
-        this.props.dispatch({ type: "ADD_ARTICLES", payload: res })
-      );
+      ).then((res) => this.props.dispatch(storeArticles(res)));
     } else {
-      fetchData(url).then((res) =>
-        this.props.dispatch({ type: "ADD_ARTICLES", payload: res })
-      );
+      fetchData(url).then((res) => this.props.dispatch(storeArticles(res)));
     }
   };
   render() {

@@ -2,6 +2,7 @@ import React from "react";
 import { withRouter, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchData } from "../utils";
+import { storeAllTag, storeArticles } from "../store/actions";
 
 class Tag extends React.Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class Tag extends React.Component {
       .then((res) => res.json())
       .then((res) => {
         this.setState({ tags: res });
-        this.props.dispatch({ type: "ADD_TAGS", payload: res });
+        this.props.dispatch(storeAllTag(res));
       });
     // console.log(this.state.tags);
   }
@@ -26,14 +27,10 @@ class Tag extends React.Component {
     if (tagName === "all") {
       fetchData(
         "https://conduit.productionready.io/api/articles?limit=10&offset=0"
-      ).then((res) =>
-        this.props.dispatch({ type: "ADD_ARTICLES", payload: res })
-      );
+      ).then((res) => this.props.dispatch(storeArticles(res)));
     } else {
       localStorage.setItem("active-tag", tagName);
-      fetchData(url).then((res) =>
-        this.props.dispatch({ type: "ADD_ARTICLES", payload: res })
-      );
+      fetchData(url).then((res) => this.props.dispatch(storeArticles(res)));
     }
   };
   render() {

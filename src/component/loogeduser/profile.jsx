@@ -5,14 +5,12 @@ import { FaUserEdit } from "react-icons/fa";
 
 import Loader from "../loader/index";
 import Article from "../article";
+import { storeArticles } from "../../store/actions";
 
 class Profile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      user: null,
-      article: null,
-    };
+    this.state = {};
   }
 
   componentDidMount() {
@@ -26,13 +24,11 @@ class Profile extends React.Component {
       }
     )
       .then((res) => res.json())
-      .then((res) =>
-        this.props.dispatch({ type: "ADD_ARTICLES", payload: res })
-      );
+      .then((res) => this.props.dispatch(storeArticles(res)));
   }
   render() {
     // console.log(this.props.userInfo, "render");
-    console.log(this.props, "state profile state");
+    // console.log(this.props, "state profile state");
 
     return this.props.user ? (
       <>

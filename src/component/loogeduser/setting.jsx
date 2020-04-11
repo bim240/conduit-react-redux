@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import Loader from "../loader/index";
 
@@ -6,8 +7,7 @@ class Setting extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userData: null,
-      bio: "A short bio about yourself"
+      bio: "A short bio about yourself",
     };
     this.username = React.createRef(null);
     this.email = React.createRef(null);
@@ -15,7 +15,7 @@ class Setting extends React.Component {
     this.image = React.createRef(null);
     this.password = React.createRef(null);
   }
-  handleInput = event => {
+  handleInput = (event) => {
     this.setState({ bio: event.target.value });
   };
   handleUpdate = () => {
@@ -23,7 +23,7 @@ class Setting extends React.Component {
       method: "PUT",
       headers: {
         authorization: `Token ${localStorage["conduit-token"]}`,
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         user: {
@@ -31,39 +31,26 @@ class Setting extends React.Component {
           username: `${this.username.current.value}`,
           bio: `${this.bio.current.value}`,
           image: `${this.image.current.value}`,
-          password: `${this.password.current.value}`
-        }
-      })
-    })
-      .then(res => res.json())
-      .then(res => console.log(res));
+          password: `${this.password.current.value}`,
+        },
+      }),
+    }).then((res) => res.json());
+    // .then((res) => console.log(res));
   };
   componentDidMount() {
-    fetch(`https://conduit.productionready.io/api/user`, {
-      method: "GET",
-      headers: {
-        authorization: `Token ${localStorage["conduit-token"]}`
-      }
-    })
-      .then(res => res.json())
-      .then(res => {
-        this.setState({ userData: res });
-        console.log(this.email.current.value, "current");
-        this.email.current.value = res.user.email;
-        this.username.current.value = res.user.username;
-        this.bio.current.value = res.user.bio;
-        this.image.current.value = res.user.image;
-      });
-    console.log(this.props.userData, "userData");
+    // console.log(this.username, "setting useernams");
+    this.email.current.value = this.props.user.email;
+    this.username.current.value = this.props.user.username;
+    this.bio.current.value = this.props.user.bio;
+    this.image.current.value = this.props.user.image;
   }
 
   render() {
-    console.log(this.state.userData);
-    return this.state.userData ? (
+    return this.props.user ? (
       <>
         <div className="setting_main_container">
           <div className="section_name">
-            {"Setting".split("").map(v => {
+            {"Setting".split("").map((v) => {
               return <div className="single_letter">{v}</div>;
             })}
           </div>
@@ -116,5 +103,10 @@ class Setting extends React.Component {
     );
   }
 }
-
-export default Setting;
+//
+function mapStateToProps(state) {
+  return {
+    user: state.userReducer.userInfo,
+  };
+}
+export default connect(mapStateToProps)(Setting);

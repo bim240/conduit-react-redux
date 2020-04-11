@@ -5,11 +5,12 @@ import { FaHome, FaEdit, FaRegRegistered, FaUserAlt } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import { IoMdLogIn, IoMdLogOut } from "react-icons/io";
 import { MdSettings } from "react-icons/md";
+import { storeUserInfo } from "../store/actions";
 
 const Header = (props) => {
   const handleLogout = (props) => {
     localStorage.clear();
-    props.dispatch({ type: "LOGOUT", payload: null });
+    props.dispatch(storeUserInfo(null));
   };
   console.log(props, "inside header");
   return (
