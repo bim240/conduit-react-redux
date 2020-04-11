@@ -76,7 +76,7 @@ class Home extends React.Component {
 }
 // consume
 function mapStateToProps(state) {
-  console.log(state.articleReducer.articles, "inside home state map to props");
+  console.log(state, "inside home state map to props");
   return {
     articles: state.articleReducer.articles
       ? state.articleReducer.articles.articles

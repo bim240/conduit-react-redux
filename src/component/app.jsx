@@ -11,6 +11,7 @@ import Setting from "./loogeduser/setting";
 import NewArticle from "./loogeduser/createArticle";
 import ArticleDetails from "./articleDetails";
 import "../assets/stylesheets/main.scss";
+import { fetchUserInfo } from "../store/actions";
 
 function Auth(newprops) {
   console.log(newprops, "auth");
@@ -26,7 +27,7 @@ function Auth(newprops) {
     </Switch>
   );
 }
-function NoAuth(newprops) {
+function NoAuth() {
   return (
     <Switch>
       <Route exact path="/" component={Home} />
@@ -45,25 +46,11 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // console.log("cdm");
-    console.log(localStorage["conduit-token"]);
-    if (localStorage["conduit-token"]) {
-      fetch(`https://conduit.productionready.io/api/user`, {
-        method: "GET",
-        headers: {
-          authorization: `Token ${localStorage["conduit-token"]}`,
-        },
-      })
-        .then((res) => res.json())
-        // .then(res => console.log(res));
-        .then((res) => {
-          this.props.dispatch({ type: "LOGIN", payload: res.user });
-        });
-    }
+    this.props.dispatch(fetchUserInfo(this.props));
   }
 
   render() {
-    // console.log(commonStore);
+    console.log(this.props, "app props");
     return (
       <div className="home_page_devision">
         <Header />

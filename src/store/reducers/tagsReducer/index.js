@@ -1,6 +1,6 @@
 const initialState = {
   allTag: null,
-  activeTag: localStorage.getItem("active-tag") || null,
+  activeTag: null,
 };
 
 export default function tagsReducer(state = initialState, action) {
